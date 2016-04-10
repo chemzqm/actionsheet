@@ -10,6 +10,8 @@ Action sheet component
 
     npm i actionsheet -S
 
+_Copy style.css as needed_
+
 ## Example
 
 ``` js
@@ -44,7 +46,7 @@ event.bind(document.getElementById('demo'), 'touchstart', tap(function () {
 Init ActionSheet with `option`
 * `option` contains actions, key is action name.
 * `option.action` action contains `text` and `callback`.
-* `option.cancel` is special action, you can omit `callback` for it.
+* `option.cancel` is special action, no `callback` for it.
 
 ## License
 
