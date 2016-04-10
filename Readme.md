@@ -22,7 +22,8 @@ event.bind(document.getElementById('demo'), 'touchstart', tap(function () {
       text: 'save',
       callback: function () {
         notice('Save tapped', {duration: 2000})
-      }
+      },
+      nowait: true
     },
     complain: {
       text: 'complain',
@@ -44,9 +45,13 @@ event.bind(document.getElementById('demo'), 'touchstart', tap(function () {
 ### Actionsheet(option)
 
 Init ActionSheet with `option`
+
 * `option` contains actions, key is action name.
-* `option.action` action contains `text` and `callback`.
+* `option.action` action contains `text` and `callback` and `nowait`.
 * `option.cancel` is special action, no `callback` for it.
+
+`nowait` is used for prompt like file upload and confirm, browser would block
+these operation if we wait for the transition end.
 
 ## License
 
