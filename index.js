@@ -7,6 +7,7 @@ var detect = require('prop-detect')
 var transitionEnd = detect.transitionend
 
 document.addEventListener('touchstart', function(){}, true)
+var shown
 
 /**
  * create action sheet
@@ -18,6 +19,7 @@ document.addEventListener('touchstart', function(){}, true)
  * @returns {Promise}
  */
 module.exports = function (option) {
+  if (shown) return
   var el = domify(template)
   var body = el.querySelector('.actionsheet-body')
   Object.keys(option).forEach(function (key) {
@@ -30,6 +32,7 @@ module.exports = function (option) {
     body.parentNode.appendChild(domify('<div class="actionsheet-foot"><div class="actionsheet-item cancel">' + text + '</div></div>'))
   }
   document.body.appendChild(el)
+  shown = true
 
   var ontap = tap(function (e) {
     var target = e.target
@@ -50,6 +53,7 @@ module.exports = function (option) {
       event.bind(el, transitionEnd, end)
       classes(el).remove('active')
       function end() {
+        shown = false
         event.unbind(el, transitionEnd, end)
         if (el.parentNode) el.parentNode.removeChild(el)
         resolve()
