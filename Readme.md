@@ -47,7 +47,7 @@ event.bind(document.getElementById('demo'), 'touchstart', tap(function () {
 Init ActionSheet with `option`
 
 * `option` contains actions, key is action name.
-* `option.action` action contains `text` and `callback` and `nowait`.
+* `option.action` action contains `text`, `callback` `redirect` and `nowait`.
 * `option.cancel` is special action, no `callback` for it.
 
 `nowait` is used for prompt like file upload and confirm, browser would block

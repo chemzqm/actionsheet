@@ -38,8 +38,12 @@ module.exports = function (option) {
     var target = e.target
     if (target.hasAttribute('data-action')){
       var action = target.dataset.action
-      var cb = option[action].callback
-      var nowait = option[action].nowait
+      var opt = option[action]
+      var cb = opt.callback
+      if (opt.redirect) cb = function () {
+        window.location.href = opt.redirect
+      }
+      var nowait = opt.nowait
       if (!cb) return
       if (nowait) {
         cleanUp()
