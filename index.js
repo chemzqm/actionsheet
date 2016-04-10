@@ -33,22 +33,28 @@ module.exports = function (option) {
 
   var ontap = tap(function (e) {
     var target = e.target
-    cleanUp()
     if (target.hasAttribute('data-action')){
       var action = target.dataset.action
       var cb = option[action].callback
-      if (cb) cb.call(null)
+      if (cb) cleanUp().then(cb)
+    } else {
+      cleanUp()
     }
   })
   event.bind(el, 'touchstart', ontap)
-  function end() {
-    event.unbind(el, transitionEnd, end)
-    if (el.parentNode) el.parentNode.removeChild(el)
-  }
+
+
   function cleanUp() {
-    event.unbind(el, 'touchstart', ontap)
-    event.bind(el, transitionEnd, end)
-    classes(el).remove('active')
+    return new Promise(function (resolve) {
+      event.unbind(el, 'touchstart', ontap)
+      event.bind(el, transitionEnd, end)
+      classes(el).remove('active')
+      function end() {
+        event.unbind(el, transitionEnd, end)
+        if (el.parentNode) el.parentNode.removeChild(el)
+        resolve()
+      }
+    })
   }
   return new Promise(function (resolve) {
     setTimeout(function () {
