@@ -1,6 +1,6 @@
 {
   "name": "actionsheet",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "actionsheet component for touch device",
   "main": "index.js",
   "scripts": {
