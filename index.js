@@ -12,6 +12,10 @@ event.bind(document.getElementById('demo'), 'touchstart', tap(function () {
         notice('Save tapped', {duration: 2000})
       }
     },
+    edit: {
+      text: 'edit',
+      redirect: '/'
+    },
     complain: {
       text: 'complain',
       callback: function () {

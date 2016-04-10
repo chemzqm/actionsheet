@@ -58,6 +58,10 @@
 	        notice('Save tapped', {duration: 2000})
 	      }
 	    },
+	    edit: {
+	      text: 'edit',
+	      redirect: '/'
+	    },
 	    complain: {
 	      text: 'complain',
 	      callback: function () {
@@ -1069,8 +1073,19 @@
 	    var target = e.target
 	    if (target.hasAttribute('data-action')){
 	      var action = target.dataset.action
-	      var cb = option[action].callback
-	      if (cb) cleanUp().then(cb)
+	      var opt = option[action]
+	      var cb = opt.callback
+	      if (opt.redirect) cb = function () {
+	        window.location.href = opt.redirect
+	      }
+	      var nowait = opt.nowait
+	      if (!cb) return
+	      if (nowait) {
+	        cleanUp()
+	        cb()
+	      } else {
+	        if (cb) cleanUp().then(cb)
+	      }
 	    } else {
 	      cleanUp()
 	    }
