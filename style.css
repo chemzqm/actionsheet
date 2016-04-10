@@ -1,0 +1,45 @@
+.actionsheet-overlay {
+  background-color: rgba(0,0,0,0);
+  position: fixed;
+  z-index: 998;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: all 200ms ease-out;
+}
+.actionsheet-overlay.active{
+  background-color: rgba(0,0,0,0.2);
+}
+.actionsheet {
+  position: absolute;
+  font-family:"Helvetica Neue", Helvetica,sans-serif;
+  left: 2px;
+  right: 2px;
+  bottom: 0px;
+  z-index: 999;
+  transform: translateY(110%);
+  transition: all 200ms ease-out;
+}
+.actionsheet-overlay.active .actionsheet{
+  transform: translateY(0);
+}
+.actionsheet-item {
+  color: #000;
+  line-height: 2.5;
+  font-size: 18px;
+  background-color: rgba(255,255,255,0.8);
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.actionsheet-item:active,
+.actionsheet-item:hover {
+  background-color: rgba(255,255,255,0.3);
+}
+.actionsheet-foot {
+  margin-top: 4px;
+}
+.actionsheet-item + .actionsheet-item {
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
