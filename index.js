@@ -39,7 +39,14 @@ module.exports = function (option) {
     if (target.hasAttribute('data-action')){
       var action = target.dataset.action
       var cb = option[action].callback
-      if (cb) cleanUp().then(cb)
+      var nowait = option[action].nowait
+      if (!cb) return
+      if (nowait) {
+        cleanUp()
+        cb()
+      } else {
+        if (cb) cleanUp().then(cb)
+      }
     } else {
       cleanUp()
     }
