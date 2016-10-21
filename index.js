@@ -25,6 +25,7 @@ module.exports = function (option) {
   Object.keys(option).forEach(function (key) {
     if (key == 'cancel') return
     var o = option[key]
+    if (o.hide === true) return
     body.appendChild(domify('<div class="actionsheet-item" data-action="' + key + '">' + o.text + '</div>'))
   })
   if (option.cancel) {
