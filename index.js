@@ -57,6 +57,7 @@ module.exports = function (option) {
     }
   })
   event.bind(el, 'touchstart', ontap)
+  event.bind(el, 'click', ontap)
 
 
   function cleanUp() {
