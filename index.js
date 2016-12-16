@@ -35,7 +35,7 @@ module.exports = function (option) {
   document.body.appendChild(el)
   shown = true
 
-  var ontap = tap(function (e) {
+  function onClick(e) {
     var target = e.target
     if (target.hasAttribute('data-action')){
       var action = target.dataset.action
@@ -55,14 +55,16 @@ module.exports = function (option) {
     } else {
       cleanUp()
     }
-  })
+  }
+  var ontap = tap(onClick)
   event.bind(el, 'touchstart', ontap)
-  event.bind(el, 'click', ontap)
+  event.bind(el, 'click', onClick)
 
 
   function cleanUp() {
     return new Promise(function (resolve) {
       event.unbind(el, 'touchstart', ontap)
+      event.unbind(el, 'click', onClick)
       event.bind(el, transitionEnd, end)
       classes(el).remove('active')
       function end() {
