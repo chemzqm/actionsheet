@@ -6,6 +6,9 @@ var event = require('event')
 var detect = require('prop-detect')
 var transitionEnd = detect.transitionend
 
+var hasTouch = require('has-touch')
+
+
 document.addEventListener('touchstart', function(){}, true)
 var shown
 
@@ -57,8 +60,11 @@ module.exports = function (option) {
     }
   }
   var ontap = tap(onClick)
-  event.bind(el, 'touchstart', ontap)
-  event.bind(el, 'click', onClick)
+  if (hasTouch) {
+    event.bind(el, 'touchstart', ontap)
+  } else {
+    event.bind(el, 'click', onClick)
+  }
 
 
   function cleanUp() {
