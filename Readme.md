@@ -49,6 +49,8 @@ Init ActionSheet with `option`
 * `option` contains actions, key is action name.
 * `option.action` action contains `text`, `callback` `redirect` and `nowait`.
 * `option.cancel` is special action, no `callback` for it.
+* `option.hide` the item is not rendered if it's true.
+* `option.redirect` a redirect url to replace callback.
 
 `nowait` is used for prompt like file upload and confirm, browser would block
 these operation if we wait for the transition end.
